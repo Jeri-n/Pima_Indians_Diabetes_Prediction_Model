@@ -1,5 +1,4 @@
 #import relevant libraries for flask, html rendering and loading the ML model
-
 from flask import Flask,request,url_for,redirect,render_template
 import pickle
 import pandas as pd
@@ -7,10 +6,7 @@ import joblib
 
 app = Flask(__name__)
 
-# model = pickle.load(open('Model.pkl','rb'))
 model = joblib.load(open('Model.pkl','rb'))
-
-# scale = pickle.load(open('Scale.pkl','rb'))
 scale = joblib.load(open('Scale.pkl','rb'))
 
 @app.route("/")
@@ -19,7 +15,6 @@ def landingPage():
 
 @app.route("/predict",methods=['POST'])
 def predict():
-
     pregnancies = request.form['1']
     glucose = request.form['2']
     bloodPressure = request.form['3']
@@ -28,11 +23,9 @@ def predict():
     bmi = request.form['6']
     dpf = request.form['7']
     age = request.form['8']   
-     
 
     rowDF = pd.DataFrame([pd.Series([pregnancies,glucose,bloodPressure,skinThickness,insulin,bmi,dpf,age])])
     rowDF_new = pd.DataFrame(scale.transform(rowDF))
-
     print(rowDF_new)
 
     #model predicton
@@ -46,8 +39,6 @@ def predict():
     else:
         valPred = round(prediction[0][1],3)
         return render_template('result.html',pred=f'Congratulations!!!, You are in a Safe Zone.\n\n Probability of you being a diabetic is only {valPred*100:.2f}%.\n\n Advice : Exercise Regularly and maintain like this..!')
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
