@@ -1,6 +1,12 @@
 # Pima Indian Diabetes Project
 
+
+
 Find the whole Readme document here : https://github.com/Jeri-n/Pima_Indians_Diabetes_Prediction_Model/blob/39ad7bbd3ce3311175557dd630f4409ef202de07/Readme.pdf
+
+UI : https://ai-diabetes-predictor.herokuapp.com/
+
+
 
 ### Input dataset
 ==============================
